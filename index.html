@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Life — Next Build</title>
+<style>
+:root{--ink:#243047;--muted:#68738a;--paper:#fffdf8;--line:#e5e8ef;--blue:#5267d9;--pink:#f4c9d8;--green:#cdebdc;--gold:#f4dfa0}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#f2f4fb;color:var(--ink)}
+button,input,select{font:inherit}button{border:0;border-radius:13px;padding:11px 14px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer}button.secondary{background:#e9ecfb;color:#3545a1}button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+.wrap{max-width:1050px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{font-weight:900;font-size:1.35rem}.pill{background:#fff;border:1px solid var(--line);padding:7px 11px;border-radius:999px;font-size:.85rem}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.9fr);gap:14px;margin-top:14px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 6px 22px #26385a0a}.hidden{display:none!important}.muted{color:var(--muted)}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(1.5rem,4vw,2.4rem);line-height:1.08;margin-bottom:8px}h2{font-size:1.15rem;margin-bottom:10px}.schools,.avatars,.actions,.places,.choices{display:flex;gap:8px;flex-wrap:wrap}.school{flex:1;min-width:190px;text-align:left;background:#fff;color:var(--ink);border:2px solid var(--line);padding:15px}.school.selected{border-color:var(--blue);background:#f0f2ff}.school b{display:block;font-size:1rem;margin-bottom:5px}.field{display:grid;gap:6px;margin:12px 0}.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:white}.avatar{font-size:1.7rem;padding:8px 12px;background:#fff;color:var(--ink);border:2px solid var(--line)}.avatar.selected{border-color:var(--blue);background:#f0f2ff}.world{min-height:275px;position:relative;overflow:hidden;border-radius:17px;background:linear-gradient(#dceeff 0 54%,#cfe8d1 54%);padding:14px;margin-bottom:12px}.sun{position:absolute;right:18px;top:16px;width:40px;height:40px;background:#ffe7a0;border-radius:50%}.building{position:absolute;left:7%;top:25%;width:54%;height:35%;background:#f5d4b4;border:4px solid #d5a889;border-radius:8px 8px 0 0}.building:before{content:"SCHOOL";position:absolute;left:0;right:0;top:8px;text-align:center;font-weight:900;color:#785c54;letter-spacing:2px}.winrow{position:absolute;top:46%;left:10%;right:10%;display:flex;justify-content:space-around}.winrow i{display:block;width:22px;height:24px;background:#9ec5e8;border:2px solid white}.path{position:absolute;bottom:-20px;left:42%;width:28%;height:48%;background:#e7d5bc;transform:skew(-15deg)}.tree{position:absolute;right:13%;bottom:25%;font-size:2.6rem}.scene-label{position:relative;z-index:2;display:inline-block;background:#ffffffd9;padding:7px 10px;border-radius:10px;font-weight:800}.player-token{position:absolute;z-index:3;bottom:24%;left:34%;font-size:2rem;transition:left .25s,top .25s;filter:drop-shadow(0 2px 1px #0002)}.npc-token{position:absolute;z-index:3;bottom:24%;font-size:1.8rem;cursor:pointer;filter:drop-shadow(0 2px 1px #0002)}.npc-token span{display:block;font-size:.62rem;background:#fff;padding:2px 5px;border-radius:7px;text-align:center;font-weight:800}.place{background:#fff;color:var(--ink);border:1px solid var(--line);padding:9px 11px}.place.active{background:#e8ebff;border-color:var(--blue);color:#3545a1}.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#f3f5fb;border-radius:12px;padding:10px}.stat strong{display:block;font-size:1.2rem}.log{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow:auto}.entry{background:#f4f6fb;border-radius:12px;padding:10px;font-size:.92rem}.entry small{color:var(--muted);display:block;margin-bottom:3px}.npc-list{display:grid;gap:8px}.npc{display:flex;gap:9px;align-items:center;background:#fff;border:1px solid var(--line);padding:9px;border-radius:12px}.npc .face{font-size:1.5rem}.npc button{margin-left:auto;padding:8px 10px}.quest{padding:12px;border-radius:13px;background:#fff6d9;border:1px solid #f1e2a8}.bar{height:8px;background:#e5e8ef;border-radius:99px;overflow:hidden;margin-top:7px}.bar i{display:block;height:100%;background:var(--blue);width:0%}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.tabs button{padding:8px 11px}.notice{font-size:.84rem;background:#f0f8f3;padding:10px;border-radius:12px;color:#315b44}.footer{font-size:.8rem;color:var(--muted);margin:14px 0 4px}.story-choice{background:#fff;color:var(--ink);border:1px solid var(--line);text-align:left;flex:1;min-width:145px}.story-choice:hover{border-color:var(--blue)}@media(max-width:760px){.layout{grid-template-columns:1fr}.world{min-height:255px}.top{align-items:flex-start}.card{padding:14px}.wrap{padding:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div><div class="brand">🎒 SCHOOL LIFE</div><div class="muted" id="subtitle">Your choices. Your school story.</div></div><div class="pill" id="daypill">Day 1 · Morning</div></header>
+  <section id="setup" class="card" style="margin-top:14px">
+    <h1>Your school story starts here.</h1><p class="muted">Choose your school and make a student. This build adds free movement, story choices, friendship and school events. Online multiplayer is not connected yet.</p>
+    <h2>Choose your school</h2>
+    <div class="schools">
+      <button class="school selected" data-school="crestwood"><b>🏛️ Crestwood Academy</b><span class="muted">Elite campus · polished halls · competitive clubs</span></button>
+      <button class="school" data-school="unity"><b>🏫 Unity High</b><span class="muted">Neighbourhood school · lively courtyard · community spirit</span></button>
+    </div>
+    <div class="field"><label for="nickname">Student nickname</label><input id="nickname" maxlength="16" placeholder="Choose a nickname" value="New Student"></div>
+    <h2>Choose your look</h2><div class="avatars" id="avatarChoices"><button class="avatar selected">👩🏽‍🎓</button><button class="avatar">👨🏾‍🎓</button><button class="avatar">👩🏻‍🎓</button><button class="avatar">🧑🏿‍🎓</button><button class="avatar">👨🏻‍🎓</button><button class="avatar">🧑🏼‍🎓</button></div>
+    <p style="margin-top:15px"><button id="startBtn">Enter school →</button> <button class="ghost" id="continueBtn">Continue saved game</button></p>
+  </section>
+  <main id="game" class="hidden">
+    <div class="layout">
+      <section class="card">
+        <div class="top"><div><h1 id="locationTitle">Courtyard</h1><div class="muted" id="locationDesc">The day is yours.</div></div><div class="pill" id="schoolPill">Crestwood Academy</div></div>
+        <div class="world" id="world"><div class="sun"></div><div class="building"><div class="winrow"><i></i><i></i><i></i><i></i></div></div><div class="path"></div><div class="tree">🌳</div><div class="scene-label" id="sceneLabel">Courtyard</div><div class="player-token" id="playerToken">👩🏽‍🎓</div><div id="npcTokens"></div></div>
+        <h2>Where do you want to go?</h2><div class="places" id="places"></div>
+        <div class="tabs"><button class="secondary" id="upBtn">⬆️ Move up</button><button class="secondary" id="leftBtn">⬅️ Move left</button><button class="secondary" id="rightBtn">Move right ➡️</button><button class="secondary" id="downBtn">⬇️ Move down</button></div>
+        <p class="muted" style="font-size:.83rem">Movement is simulated inside this school scene. Tap a classmate below to interact.</p>
+        <div class="actions"><button id="lookBtn">Look around</button><button id="activityBtn">Join an activity</button><button class="ghost" id="nextDayBtn">Finish day →</button></div>
+      </section>
+      <aside style="display:grid;gap:14px;align-content:start">
+        <section class="card"><h2>Your student profile</h2><div class="statrow"><div class="stat">Friends<strong id="friends">0</strong></div><div class="stat">Reputation<strong id="rep">0</strong></div><div class="stat">Energy<strong id="energy">5</strong></div></div><div style="margin-top:12px">School spirit <b id="spiritText">0%</b><div class="bar"><i id="spiritBar"></i></div></div></section>
+        <section class="card"><h2>Today's story</h2><div id="questBox" class="quest"><b id="questTitle">A new beginning</b><p id="questDesc" style="margin:6px 0 10px">Say hello to one classmate and explore the school.</p><button class="secondary" id="questBtn">Check progress</button></div><div id="storyBox" style="margin-top:10px"></div></section>
+        <section class="card"><h2>Classmates nearby</h2><div class="npc-list" id="npcList"></div></section>
+        <section class="card"><h2>School diary</h2><div class="log" id="diary"></div><p style="margin:10px 0 0"><button class="ghost" id="saveBtn">Save game</button> <button class="ghost" id="resetBtn">Reset</button></p><p class="notice" style="margin:10px 0 0">Demo safety: classmates are fictional. This version has no public chat, accounts, or online players.</p></section>
+      </aside>
+    </div>
+  </main>
+  <p class="footer">School Life prototype · saved on this device only · online multiplayer requires a connected, secured backend.</p>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const locations={
+ courtyard:{name:"Courtyard",desc:"Students are gathering before the bell.",emoji:"🌳"},
+ classroom:{name:"Classroom",desc:"Books open, chairs scraping, a lesson about to begin.",emoji:"📚"},
+ cafeteria:{name:"Cafeteria",desc:"The lunch queue is already becoming a debate.",emoji:"🥪"},
+ sports:{name:"Sports field",desc:"Teams are choosing sides for a friendly match.",emoji:"⚽"},
+ club:{name:"Club room",desc:"Ideas, posters and club sign-up sheets everywhere.",emoji:"🎨"},
+ library:{name:"Library",desc:"A quieter corner for reading, planning and helping classmates.",emoji:"📖"}
+};
+const people=[
+{id:"amara",name:"Amara",face:"👩🏽‍🎓",personality:"thoughtful",lines:["I like people who actually listen. How's your first day?","I'm thinking of starting a reading circle. Would you join?","That was kind of you to check in."]},
+{id:"tobi",name:"Tobi",face:"👨🏾‍🎓",personality:"funny",lines:["Important question: is break time too short or extremely too short?","I can make a joke out of almost anything. Almost.","You seem cool. Want to join the activity later?"]},
+{id:"zara",name:"Zara",face:"👩🏻‍🎓",personality:"ambitious",lines:["The club fair is a great chance to try something new.","I want our class project to be the best, but everyone should get a say.","Let's plan it properly instead of rushing."]},
+{id:"kene",name:"Kene",face:"🧑🏿‍🎓",personality:"sporty",lines:["We're organising a friendly game. No experience needed.","A good teammate encourages people, even when they miss.","Want to help us pick teams?"]},
+{id:"ife",name:"Ife",face:"🧑🏼‍🎓",personality:"creative",lines:["I have an idea for the school noticeboard.","What if we made a club where people share their talents?","I like your energy. Let's create something together."]},
+{id:"dami",name:"Dami",face:"👨🏻‍🎓",personality:"reserved",lines:["New place, lots of people. I'm still getting used to it.","Thanks for saying hello. It can be awkward being new.","Maybe we could work on the assignment together."]}
+];
+let state={school:"crestwood",name:"New Student",avatar:"👩🏽‍🎓",location:"courtyard",day:1,period:0,x:34,y:24,friends:0,rep:0,energy:5,spirit:0,met:[],activityDone:[],diary:[],questDone:false,storyIndex:0};
+const schoolNames={crestwood:"Crestwood Academy",unity:"Unity High"};
+function log(msg){state.diary.unshift({day:state.day,msg});state.diary=state.diary.slice(0,18);renderDiary()}
+function renderDiary(){ $("#diary").innerHTML=state.diary.map(e=>`<div class="entry"><small>Day ${e.day}</small>${escapeHtml(e.msg)}</div>`).join("")||'<div class="muted">Your school memories will appear here.</div>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function save(){localStorage.setItem("schoolLifeNext",JSON.stringify(state));log("Game saved on this device.");localStorage.setItem("schoolLifeNext",JSON.stringify(state));}
+function load(){try{const s=JSON.parse(localStorage.getItem("schoolLifeNext"));if(!s)return false;state={...state,...s};return true}catch(e){return false}}
+function start(){state.name=$("#nickname").value.trim().slice(0,16)||"New Student";state.avatar=$(".avatar.selected")?.textContent||"👩🏽‍🎓";$("#setup").classList.add("hidden");$("#game").classList.remove("hidden");log(`Day ${state.day}: ${state.name} arrived at ${schoolNames[state.school]}.`);render();save()}
+function render(){
+$("#subtitle").textContent=`Welcome, ${state.name}. Your choices shape your story.`;
+$("#daypill").textContent=`Day ${state.day} · ${["Morning","Break","Afternoon"][state.period%3]}`;
+$("#schoolPill").textContent=schoolNames[state.school];$("#locationTitle").textContent=locations[state.location].name;$("#locationDesc").textContent=locations[state.location].desc;$("#sceneLabel").textContent=locations[state.location].name;$("#playerToken").textContent=state.avatar;$("#playerToken").style.left=state.x+"%";$("#playerToken").style.bottom=state.y+"%";
+$("#friends").textContent=state.friends;$("#rep").textContent=state.rep;$("#energy").textContent=state.energy;$("#spiritText").textContent=state.spirit+"%";$("#spiritBar").style.width=state.spirit+"%";
+$("#places").innerHTML=Object.entries(locations).map(([k,v])=>`<button class="place ${state.location===k?'active':''}" data-place="${k}">${v.emoji} ${v.name}</button>`).join("");
+$$("[data-place]").forEach(b=>b.onclick=()=>go(b.dataset.place));
+const nearby=people.filter(p=>!state.met.includes(p.id)||Math.random()>.45).slice(0,4);
+$("#npcTokens").innerHTML=nearby.map((p,i)=>`<div class="npc-token" style="left:${[12,54,72,83][i]}%;bottom:${[22,29,21,33][i]}%" data-person="${p.id}">${p.face}<span>${p.name}</span></div>`).join("");
+$$("[data-person]").forEach(el=>el.onclick=()=>talk(el.dataset.person));
+$("#npcList").innerHTML=people.map(p=>`<div class="npc"><div class="face">${p.face}</div><div><b>${p.name}</b><div class="muted" style="font-size:.8rem">${state.met.includes(p.id)?"Friendship started":"Classmate · "+p.personality}</div></div><button class="secondary" data-talk="${p.id}">Talk</button></div>`).join("");
+$$("[data-talk]").forEach(b=>b.onclick=()=>talk(b.dataset.talk));
+$("#questTitle").textContent=state.questDone?"First-day mission complete!":"A new beginning";
+$("#questDesc").textContent=state.questDone?"You introduced yourself and explored. New school days bring new stories.":"Say hello to one classmate and visit a different school location.";
+$("#questBtn").textContent=state.questDone?"Mission complete ✓":"Check progress";
+renderDiary();
+}
+function go(k){if(!locations[k])return;state.location=k;state.x=25+Math.floor(Math.random()*48);state.y=20+Math.floor(Math.random()*15);log(`You went to the ${locations[k].name.toLowerCase()}.`);if(!state.questDone&&k!=="courtyard"&&state.met.length>0){state.questDone=true;state.rep+=2;state.spirit=Math.min(100,state.spirit+10);log("Mission complete: you made a connection and explored the school. Reputation +2.");}render();save()}
+function talk(id){const p=people.find(x=>x.id===id);if(!p)return;const first=!state.met.includes(id);const line=p.lines[(state.day+state.met.length+state.storyIndex)%p.lines.length];let msg=`${p.name}: “${line}”`;if(first){state.met.push(id);state.friends+=1;state.rep+=1;state.spirit=Math.min(100,state.spirit+5);msg+=` You introduced yourself. Friendship +1.`;if(state.met.length>=1&&state.location!=="courtyard"&&!state.questDone){state.questDone=true;state.rep+=2;state.spirit=Math.min(100,state.spirit+10);msg+=" First-day mission complete!";}}else{state.rep=Math.min(100,state.rep+1);msg+=" You spent a little time catching up.";}state.energy=Math.max(0,state.energy-1);state.storyIndex++;log(msg);render();save();$("#storyBox").innerHTML=`<div class="entry"><b>Conversation with ${p.name}</b><p style="margin:6px 0">${escapeHtml(line)}</p><div class="choices"><button class="story-choice" data-choice="kind">😊 Be friendly</button><button class="story-choice" data-choice="ask">💬 Ask a question</button><button class="story-choice" data-choice="invite">🤝 Invite them to an activity</button></div></div>`;$$("[data-choice]").forEach(b=>b.onclick=()=>choice(b.dataset.choice,p))}
+function choice(kind,p){let msg;if(kind==="kind"){state.friends++;state.rep+=1;state.spirit=Math.min(100,state.spirit+4);msg=`You encouraged ${p.name}. They seem more comfortable around you.`}else if(kind==="ask"){state.rep+=1;msg=`You asked ${p.name} about their interests and learned a little more about them.`}else{if(!state.activityDone.includes(p.id)){state.activityDone.push(p.id);state.friends++;state.spirit=Math.min(100,state.spirit+8);msg=`${p.name} agreed to join you for a school activity. Friendship +1.`}else msg=`${p.name} says you already planned an activity together. Try another school spot.`}state.energy=Math.max(0,state.energy-1);log(msg);$("#storyBox").innerHTML=`<div class="entry">${escapeHtml(msg)}</div>`;render();save()}
+function move(dx,dy){state.x=Math.max(4,Math.min(86,state.x+dx));state.y=Math.max(8,Math.min(60,state.y+dy));render();save()}
+$("#upBtn").onclick=()=>move(0,8);$("#downBtn").onclick=()=>move(0,-8);$("#leftBtn").onclick=()=>move(-8,0);$("#rightBtn").onclick=()=>move(8,0);
+$("#lookBtn").onclick=()=>{const msgs={courtyard:"A few classmates are chatting near the noticeboard.",classroom:"There is a group assignment on the board. Everyone needs a role.",cafeteria:"Someone is looking for a seat. A small invitation could make their day.",sports:"The teams need encouragement more than perfect players.",club:"The club leaders are collecting ideas for the next school event.",library:"A student has offered to help anyone who is stuck on their work."};log(msgs[state.location]);state.energy=Math.min(5,state.energy+1);render();save()};
+$("#activityBtn").onclick=()=>{if(state.energy===0){log("You're tired. Finish the day to rest and regain energy.");render();return}const opts={courtyard:["Help make a welcome poster","You helped decorate the noticeboard. School spirit +10.","poster"],classroom:["Contribute to a group assignment","You shared an idea and made sure everyone got a role. Reputation +2.","project"],cafeteria:["Help organise a friendly lunch table","You made space for someone to join the group. Friendship +1.","lunch"],sports:["Join a friendly team challenge","You cheered on your team and played fairly. School spirit +12.","sports"],club:["Pitch an idea at club meeting","Your idea inspired a new club activity. Reputation +2.","club"],library:["Join a quiet study circle","You shared notes and learned something useful. Energy +1.","study"]};const o=opts[state.location];if(state.activityDone.includes(o[2])){log("You've already completed this activity today. Try a different location.");return}state.activityDone.push(o[2]);state.energy=Math.max(0,state.energy-1);state.rep+=2;state.spirit=Math.min(100,state.spirit+10);if(state.location==="cafeteria")state.friends++;if(state.location==="library")state.energy=Math.min(5,state.energy+2);log(o[1]);render();save()};
+$("#nextDayBtn").onclick=()=>{state.day++;state.period=0;state.energy=5;state.activityDone=[];state.questDone=false;state.location="courtyard";state.x=34;state.y=24;state.storyIndex++;log(`Day ${state.day} begins. A new school day means new chances.`);render();save();$("#storyBox").innerHTML=`<div class="entry"><b>New day, new story</b><p style="margin:6px 0">What will you focus on today?</p><div class="choices"><button class="story-choice" data-new="friends">Make new friends</button><button class="story-choice" data-new="clubs">Explore clubs</button><button class="story-choice" data-new="study">Focus on schoolwork</button></div></div>`;$$("[data-new]").forEach(b=>b.onclick=()=>{const messages={friends:"You decided to be more welcoming today.",clubs:"You decided to try something outside your usual routine.",study:"You decided to balance fun with your schoolwork."};log(messages[b.dataset.new]);state.rep+=1;render();save()})};
+$("#questBtn").onclick=()=>{alert(state.questDone?"Mission complete! You made a connection and explored.":"Progress: "+state.met.length+" classmates met. Visit a location other than the courtyard to finish this mission.");};
+$("#saveBtn").onclick=save;
+$("#resetBtn").onclick=()=>{if(confirm("Reset this local game and start a new school story?")){localStorage.removeItem("schoolLifeNext");location.reload()}};
+$$("[data-school]").forEach(b=>b.onclick=()=>{$$("[data-school]").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");state.school=b.dataset.school});
+$$(".avatar").forEach(b=>b.onclick=()=>{$$(".avatar").forEach(x=>x.classList.remove("selected"));b.classList.add("selected")});
+$("#startBtn").onclick=start;
+$("#continueBtn").onclick=()=>{if(load()){ $("#setup").classList.add("hidden");$("#game").classList.remove("hidden");render()}else alert("No saved game was found on this device yet.")};
+if(localStorage.getItem("schoolLifeNext"))$("#continueBtn").disabled=false;
+</script>
+</body></html>
